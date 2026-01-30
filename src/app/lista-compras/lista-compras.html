@@ -11,6 +11,8 @@
     />
 
     <button type="submit">Adicionar</button>
+
+    <button type="button" (click)="limparLista()">Limpar Lista</button>
   </form>
 
   <table>
@@ -24,9 +26,13 @@
     <tbody>
       @for (elemento of lista; track elemento.id) {
         <tr>
-          <th>{{ elemento.id }}</th>
-          <th>{{ elemento.nome }}</th>
-          <td><input type="checkbox" /></td>
+          <td>{{ elemento.id }}</td>
+          <td>
+            <span [ngClass]="{ 'item-riscado': elemento.comprado }"> {{ elemento.nome }} </span>
+          </td>
+          <td>
+            <input type="checkbox" (click)="riscarItem(elemento)" [checked]="elemento.comprado" />
+          </td>
         </tr>
       } @empty {
         <tr colspan="3">
